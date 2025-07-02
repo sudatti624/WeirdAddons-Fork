@@ -6,10 +6,10 @@ This is an unofficial fork of [WeirdAddons](https://github.com/FxMorin/WeirdAddo
 It has been modified and adjusted for personal use, and is not affiliated with the original author.
 
 もし使いたい方がいれば、ご自由にどうぞ。  
-ただし、サポートなどはできないので、その点はご理解ください。
+ただし、サポートは行っておらず、使用による問題については一切責任を負いません。ご了承ください。
 
 Feel free to use it if you're interested.  
-However, please note that no support or maintenance is provided.
+However, no support is provided, and I am not responsible for any issues caused by its use. Please use at your own risk.
 
 # Features
 ## commandWeird
