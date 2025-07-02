@@ -9,8 +9,7 @@ It has been modified and adjusted for personal use, and is not affiliated with t
 ただし、サポートは行っておらず、使用による問題については一切責任を負いません。ご了承ください。
 
 Feel free to use it if you're interested.  
-However, no support is provided, and I am not responsible for any issues caused by its use.
-Please use at your own risk.
+However, no support is provided, and I am not responsible for any issues caused by its use. Please use at your own risk.
 
 # Features
 ## commandWeird
