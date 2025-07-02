@@ -1,7 +1,15 @@
-# WeirdAddons
-[Fabric Carpet](https://github.com/gnembon/fabric-carpet) extension mod which adds a bunch of interesting but weird new features.
+# WeirdAddons-Fork
+このMODは、FxMorin さんの [WeirdAddons](https://github.com/FxMorin/WeirdAddons) をベースにした非公式フォークです。  
+個人で使うために改造・調整しているもので、元の作者さんとは関係ありません。
 
-Join my discord for more information, updates, and discussion on the mod [FX's Discord](https://discord.gg/vurv5pdFpa)
+This is an unofficial fork of [WeirdAddons](https://github.com/FxMorin/WeirdAddons) by FxMorin.  
+It has been modified and adjusted for personal use, and is not affiliated with the original author.
+
+もし使いたい方がいれば、ご自由にどうぞ。  
+ただし、サポートなどはできないので、その点はご理解ください。
+
+Feel free to use it if you're interested.  
+However, please note that no support or maintenance is provided.
 
 # Features
 ## commandWeird
