@@ -11,6 +11,12 @@ It has been modified and adjusted for personal use, and is not affiliated with t
 Feel free to use it if you're interested.  
 However, no support is provided, and I am not responsible for any issues caused by its use. Please use at your own risk.
 
+> 【警告 **/** WARNING】
+> 
+>**一部の機能を有効にすると、Minecraftがクラッシュする可能性があります。**   
+>
+> **Enabling certain features may cause Minecraft to crash.**
+
 # Features
 ## commandWeird
 Simple toggle for the /weird command
