@@ -31,7 +31,15 @@ class ScaffoldingBlockMixin extends Block {
         if (WeirdAddonsSettings.scaffoldingBreaking.equals("float")) {
             return true;
         } else if (WeirdAddonsSettings.scaffoldingBreaking.equals("gravity")) {
-            return serverWorld.spawnEntity(new FallingBlockEntity(serverWorld, (double)pos.getX() + 0.5D, pos.getY(), (double)pos.getZ() + 0.5D,serverWorld.getBlockState(pos).with(WATERLOGGED, false)));
+            BlockState blockState = serverWorld.getBlockState(pos).with(WATERLOGGED, false);
+
+            FallingBlockEntity entity = FallingBlockEntity.spawnFromBlock(
+                    serverWorld,
+                    pos,
+                    blockState
+            );
+
+            return serverWorld.spawnEntity(entity);
         } else {
             return serverWorld.breakBlock(pos, true);
         }

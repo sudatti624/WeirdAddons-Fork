@@ -78,13 +78,23 @@ class RedstoneLampBlockMixin extends Block {
                     }
                 }
             }
-        } else if (WeirdAddonsSettings.fallingBlockMechanic && world.getBlockState(pos.up()).getBlock() instanceof BeaconBlock && world.getBlockState(pos.up(2)).getBlock() instanceof FallingBlock) {
+        } else if (
+                WeirdAddonsSettings.fallingBlockMechanic &&
+                        world.getBlockState(pos.up()).getBlock() instanceof BeaconBlock &&
+                        world.getBlockState(pos.up(2)).getBlock() instanceof FallingBlock
+        ) {
             world.removeBlock(pos.up(2), false);
-            BlockState blockBelow = world.getBlockState(pos.down());
-            world.spawnEntity(new FallingBlockEntity(world, (double) pos.getX() + 0.5D, pos.down().getY(), (double) pos.getZ() + 0.5D, blockBelow));
-        }
-        if (state.hasBlockEntity() && !state.isOf(newState.getBlock())) {
-            world.removeBlockEntity(pos);
+
+            BlockPos below = pos.down();
+            BlockState blockBelow = world.getBlockState(below);
+
+            FallingBlockEntity falling = FallingBlockEntity.spawnFromBlock(
+                    world,
+                    below,
+                    blockBelow
+            );
+
+            world.spawnEntity(falling);
         }
     }
 }
