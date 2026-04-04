@@ -1,16 +1,13 @@
 # WeirdAddons-Fork
-このMODは、FxMorin さんの [WeirdAddons](https://github.com/FxMorin/WeirdAddons) をベースにした非公式フォークです。  
-個人で使うために改造・調整しているもので、元の作者さんとは関係ありません。
+
+[日本語版 README はこちら / Japanese README](README_ja.md)
 
 This is an unofficial fork of [WeirdAddons](https://github.com/FxMorin/WeirdAddons) by FxMorin.  
-It has been modified and adjusted for personal use, and is not affiliated with the original author.
+It has been modified for personal use and is not affiliated with, nor endorsed by, the original author.
 
-もし使いたい方がいれば、ご自由にどうぞ。  
-ただし、サポートは行っておらず、使用による問題については一切責任を負いません。ご了承ください。
+Feel free to use it if you find it helpful. However, please note that this is provided "as-is" without any support or warranty. 
 
-Feel free to use it if you're interested.  
-However, no support is provided, and I am not responsible for any issues caused by its use. Please use at your own risk.
-
+I am not responsible for any issues or damages that may arise from its use. Use at your own risk.
 > 【警告 **/** WARNING】
 > 
 >**一部の機能を有効にすると、Minecraftがクラッシュする可能性があります。**   
