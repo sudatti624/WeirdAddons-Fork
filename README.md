@@ -8,11 +8,9 @@ It has been modified for personal use and is not affiliated with, nor endorsed b
 Feel free to use it if you find it helpful. However, please note that this is provided "as-is" without any support or warranty. 
 
 I am not responsible for any issues or damages that may arise from its use. Use at your own risk.
-> 【警告 **/** WARNING】
+> 【WARNING】
 > 
->**一部の機能を有効にすると、Minecraftがクラッシュする可能性があります。**   
->
-> **Enabling certain features may cause Minecraft to crash.**
+> **Enabling certain features may cause the game to crash.**
 
 # Features
 ## commandWeird
