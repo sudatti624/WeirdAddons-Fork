@@ -1,6 +1,5 @@
 package weirdaddons;
 
-import carpet.CarpetServer;
 import net.minecraft.network.MessageType;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -17,17 +16,20 @@ public class WeirdAddonsUtils {
 
     public static HashSet<UUID> playersWatching = new HashSet<>();
 
-    public static void sendToPlayer(UUID playerUUID, String msg) {
-        CarpetServer.minecraft_server.getPlayerManager().getPlayer(playerUUID).sendMessage(new LiteralText(msg), MessageType.SYSTEM,playerUUID);
+    public static void sendToPlayer(MinecraftServer server, UUID playerUUID, String msg) {
+        ServerPlayerEntity player = server.getPlayerManager().getPlayer(playerUUID);
+        if (player != null) {
+            player.sendMessage(new LiteralText(msg), MessageType.SYSTEM, playerUUID);
+        }
     }
 
     public static void updateDisplayingChunks(MinecraftServer server) {
         for (UUID player : playersWatching) {
-            sendToPlayer(player, DisplayChunks(WeirdAddonsSettings.chunkWorld, WeirdAddonsSettings.chunkPos, WeirdAddonsSettings.chunkRadius, player));
+            sendToPlayer(server, player, displayChunks(server, WeirdAddonsSettings.chunkWorld, WeirdAddonsSettings.chunkPos, WeirdAddonsSettings.chunkRadius, player));
         }
     }
 
-    public static String DisplayChunks(World world, ChunkPos pos, int radius, UUID playerUUID){
+    public static String displayChunks(MinecraftServer server, World world, ChunkPos pos, int radius, UUID playerUUID){
         ChunkManager chunkManager = world.getChunkManager();
         StringBuilder result = new StringBuilder();
         for (int x = pos.x-radius; x <= pos.x+radius; x++) {
@@ -39,35 +41,35 @@ public class WeirdAddonsUtils {
                 }
                 if (chunk != null) {
                     boolean isPlayerChunk = false;
-                    for (ServerPlayerEntity player : CarpetServer.minecraft_server.getPlayerManager().getPlayerList()) {
+                    for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
                         if (player != null && player.getChunkPos().x == x && player.getChunkPos().z == z) {
                             isPlayerChunk = true;
                             break;
                         }
                     }
                     if (isPlayerChunk) {
-                        ServerPlayerEntity player = CarpetServer.minecraft_server.getPlayerManager().getPlayer(playerUUID);
+                        ServerPlayerEntity player = server.getPlayerManager().getPlayer(playerUUID);
                         if (player != null && player.getChunkPos().x == x && player.getChunkPos().z == z) {
                             result.append("§5☻");
                         } else {
-                            result.append("§5"+icon);
+                            result.append("§5").append(icon);
                         }
                     } else {
                         ChunkHolder.LevelType levelType = chunk.getLevelType();
                         if (levelType == ChunkHolder.LevelType.TICKING) {
-                            result.append("§a"+icon); //green
+                            result.append("§a").append(icon); //green
                         } else if (levelType == ChunkHolder.LevelType.ENTITY_TICKING) {
-                            result.append("§2"+icon); //dark_green
+                            result.append("§2").append(icon); //dark_green
                         } else if (levelType == ChunkHolder.LevelType.BORDER) {
-                            result.append("§7"+icon); //gray
+                            result.append("§7").append(icon); //gray
                         } else if (levelType == ChunkHolder.LevelType.INACCESSIBLE) {
-                            result.append("§4"+icon); //red
+                            result.append("§4").append(icon); //red
                         } else {
-                            result.append("§8"+icon); //dark_gray - null levelType
+                            result.append("§8").append(icon); //dark_gray - null levelType
                         }
                     }
                 } else {
-                    result.append("§0"+icon); //black - null chunk
+                    result.append("§0").append(icon); //black - null chunk
                 }
             }
             result.append("\n");

@@ -4,7 +4,6 @@ import net.minecraft.block.*;
 import net.minecraft.entity.FallingBlockEntity;
 import net.minecraft.server.world.ChunkHolder;
 import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
@@ -15,6 +14,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import weirdaddons.WeirdAddonsSettings;
 
+@SuppressWarnings("unused")
 @Mixin(RedstoneLampBlock.class)
 class RedstoneLampBlockMixin extends Block {
 
@@ -22,11 +22,7 @@ class RedstoneLampBlockMixin extends Block {
 
     public RedstoneLampBlockMixin(Settings settings) { super(settings); }
 
-    private static boolean canFallThrough(BlockState state) {
-        Material material = state.getMaterial();
-        return state.isAir() || state.isIn(BlockTags.FIRE) || material.isLiquid() || material.isReplaceable();
-    }
-
+    @SuppressWarnings("deprecation")
     @Override
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (moved && state.get(LIT)) {
@@ -78,23 +74,12 @@ class RedstoneLampBlockMixin extends Block {
                     }
                 }
             }
-        } else if (
-                WeirdAddonsSettings.fallingBlockMechanic &&
-                        world.getBlockState(pos.up()).getBlock() instanceof BeaconBlock &&
-                        world.getBlockState(pos.up(2)).getBlock() instanceof FallingBlock
-        ) {
-            world.removeBlock(pos.up(2), false);
-
-            BlockPos below = pos.down();
-            BlockState blockBelow = world.getBlockState(below);
-
-            FallingBlockEntity falling = FallingBlockEntity.spawnFromBlock(
-                    world,
-                    below,
-                    blockBelow
-            );
-
-            world.spawnEntity(falling);
+        } else if (WeirdAddonsSettings.fallingBlockMechanic && world.getBlockState(pos.up()).getBlock() instanceof BeaconBlock && world.getBlockState(pos.up(2)).getBlock() instanceof FallingBlock) {
+            // spawnFromBlockは内部でブロックをairに置き換えるため、removeBlockは不要
+            FallingBlockEntity.spawnFromBlock(world, pos.up(2), world.getBlockState(pos.up(2)));
+        }
+        if (state.hasBlockEntity() && !state.isOf(newState.getBlock())) {
+            world.removeBlockEntity(pos);
         }
     }
 }

@@ -19,9 +19,12 @@ import weirdaddons.WeirdAddonsSettings;
 public abstract class FarmlandBlock_featherFallingMixin extends Block {
     public FarmlandBlock_featherFallingMixin(Settings settings) { super(settings); }
 
-    @Inject(method = "onLandedUpon(Lnet/minecraft/world/World;Lnet/minecraft/block/BlockState;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/entity/Entity;F)V",at = @At(shift= At.Shift.BEFORE,value="INVOKE",target="Lnet/minecraft/block/FarmlandBlock;setToDirt(Lnet/minecraft/block/BlockState;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;)V"),cancellable = true)
+    @Inject(method = "onLandedUpon(Lnet/minecraft/world/World;Lnet/minecraft/block/BlockState;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/entity/Entity;F)V",
+            at = @At("HEAD"), cancellable = true)
     private void stopTrampleIfFeather(World world, BlockState state, BlockPos pos, Entity entity, float fallDistance, CallbackInfo ci) {
-        if (WeirdAddonsSettings.featherFallingPlus && EnchantmentHelper.getEquipmentLevel(Enchantments.FEATHER_FALLING, (LivingEntity) entity) > 0) {
+        if (WeirdAddonsSettings.featherFallingPlus && entity instanceof LivingEntity livingEntity
+                && EnchantmentHelper.getEquipmentLevel(Enchantments.FEATHER_FALLING, livingEntity) > 0) {
+            // setToDirtをスキップし、Block.onLandedUpon(落下ダメージ処理)のみ実行
             super.onLandedUpon(world, state, pos, entity, fallDistance);
             ci.cancel();
         }

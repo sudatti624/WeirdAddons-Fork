@@ -37,6 +37,7 @@ public class ObserverBlockMixin extends FacingBlock {
         return WeirdAddonsSettings.observerDelay;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (state.get(POWERED)) {

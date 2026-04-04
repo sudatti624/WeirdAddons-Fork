@@ -17,6 +17,7 @@ import weirdaddons.WeirdAddonsSettings;
 
 import java.util.Random;
 
+@SuppressWarnings("unused")
 @Mixin(ScaffoldingBlock.class)
 class ScaffoldingBlockMixin extends Block {
 
@@ -32,14 +33,9 @@ class ScaffoldingBlockMixin extends Block {
             return true;
         } else if (WeirdAddonsSettings.scaffoldingBreaking.equals("gravity")) {
             BlockState blockState = serverWorld.getBlockState(pos).with(WATERLOGGED, false);
-
-            FallingBlockEntity entity = FallingBlockEntity.spawnFromBlock(
-                    serverWorld,
-                    pos,
-                    blockState
-            );
-
-            return serverWorld.spawnEntity(entity);
+            // spawnFromBlockは内部でブロックをairに置き換えるため、breakBlockは不要
+            FallingBlockEntity.spawnFromBlock(serverWorld, pos, blockState);
+            return true;
         } else {
             return serverWorld.breakBlock(pos, true);
         }
